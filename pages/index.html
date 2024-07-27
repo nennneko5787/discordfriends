@@ -90,10 +90,6 @@
                 window.location.href = `https://discord.com/oauth2/authorize?client_id=1266569180199518289&response_type=code&redirect_uri=http%3A%2F%2F${window.location.host}%2Fcallback&scope=guilds+identify`;
             }
 
-            if (!getCookie("token")) {
-                login();
-            }
-
             async function loadServers() {
                 let response = await fetch("/api/serverlist", {
                     "headers": {
