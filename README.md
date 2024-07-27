@@ -1,0 +1,2 @@
+# discordfriends
+でぃすこーどフレンズ！
