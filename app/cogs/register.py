@@ -16,11 +16,11 @@ class RegisterCog(commands.Cog):
     async def registerCommand(self, ctx: commands.Context):
         await ctx.defer()
         conn: asyncpg.Connection = await Env.dbConnect()
-        row = await conn.fetchval(
+        val = await conn.fetchval(
             "SELECT name FROM servers WHERE id = $1", ctx.guild.id
         )
 
-        if row:
+        if val:
             embed = discord.Embed(
                 title="既にでぃすフレに登録できる状態のようです",
                 description="[でぃすフレのダッシュボード](https://htnmk.site/dashboard)にアクセスして、サーバーの概要を書いて公開しましょう。",

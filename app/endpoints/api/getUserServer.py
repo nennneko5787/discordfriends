@@ -22,6 +22,7 @@ async def getUserServer(authorization: str = Header(...)):
             if row:
                 row = dict(row)
                 row["raw"] = server
+                row["id_str"] = str(row["id"])
                 servers.append(row)
             await asyncio.sleep(0)
     finally:

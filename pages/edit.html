@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>ダッシュボード - でぃすこーどフレンズ！</title>
+        <title>サーバー編集 - でぃすこーどフレンズ！</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
         <style>
             .loader {
@@ -74,20 +74,19 @@
             </div>
         </nav>
 
-        <div class="container text-center">
-            <div style="padding: 10px">
-                <h6>サーバーがダッシュボードに表示されない場合</h6>
-                <ul>
-                    <li>サーバーに<a href="https://discord.com/oauth2/authorize?client_id=1266569180199518289">ボットを招待</a>します。</li>
-                    <li>ボットを導入したサーバー内にて<b>/register</b>コマンドを実行し、サーバーをデータベースに登録します。</li>
-                    <li>ボットを導入したサーバー内にて<b>/invite</b>コマンドを実行し、サーバーの招待リンクをデータベースに登録します。</li>
-                </ul>
-                <p>以上の操作を行ってもサーバーが表示されない場合、お手数ですが<a href="https://discord.gg/M3bpz4hCjc">サポートサーバー</a>へご連絡ください。</p>
-            </div>
-
-            <div class="row align-items-start" id="servers">
-                <div style="display: flex; justify-content: center; align-items: center;"><div class="loader"></div></div>
-            </div>
+        <div style="padding: 10px;">
+            <h1 id="h1">編集</h1>
+            <label for="short" class="form-label">サーバーの概要(50文字以内): </label>
+            <input type="text" id="short" maxlength="50" />
+            <br>
+            <label for="description" class="form-label">サーバーの説明: </label>
+            <textarea class="form-control" id="description"></textarea>
+            <br>
+            <label for="nsfw" class="form-label">NSFWサーバー: </label>
+            <input type="checkbox" id="nsfw" />
+            <br>
+            <button type="button" class="btn btn-primary" id="saveButton">保存</button>
+            <p id="detail"></p>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -98,51 +97,56 @@
                 return null;
             }
 
+            let serverid = window.location.href.split("/")[4];
+
             if (!getCookie("token")) {
                 window.location.href = `https://discord.com/oauth2/authorize?client_id=1266569180199518289&response_type=code&redirect_uri=http%3A%2F%2F${window.location.host}%2Fcallback&scope=guilds+identify`;
             }
 
             async function loadServers() {
-                let response = await fetch("/api/user/servers", {
-                    "headers": {
-                        "Authorization": getCookie("token")
-                    }
-                });
+                let response = await fetch(`/api/server/${serverid}`);
                 let jsonData = await response.json();
                 console.log(jsonData);
+                document.getElementById("h1").innerText = `${jsonData.name} の編集`;
+                document.getElementById("short").setAttribute("value", jsonData.short);
+                document.getElementById("description").innerText = jsonData.description;
+                document.getElementById("nsfw").setAttribute("value", jsonData.nsfw);
+            }
 
-                document.getElementById("servers").innerHTML = "";
-
-                jsonData.forEach(server => {
-                    let element = document.createElement("div");
-                    element.className = "col-2";
-
-                    let serverImage = document.createElement("img");
-                    serverImage.src = server.icon;
-                    serverImage.style = "width: 50%; height: 5s0%;";
-                    element.appendChild(serverImage);
-
-                    element.appendChild(document.createElement("br"));
-
-                    let serverName = document.createElement("span");
-                    serverName.innerText = server.name;
-                    element.appendChild(serverName);
-
-                    element.appendChild(document.createElement("br"));
-
-                    let serverEditButton = document.createElement("a");
-                    serverEditButton.className = "btn btn-primary";
-                    serverEditButton.setAttribute("role", "button");
-                    serverEditButton.innerText = "編集";
-                    serverEditButton.href = `/servers/${server.id_str}/edit`;
-                    element.appendChild(serverEditButton);
-
-                    document.getElementById("servers").appendChild(element);
+            async function saveEdits() {
+                let short = document.getElementById("short").value;
+                let description= document.getElementById("description").value;
+                let nsfw = document.getElementById("nsfw").checked;
+                let body = JSON.stringify({ short: short, description: description, nsfw: nsfw });
+                console.log(body);
+                let response = await fetch(`/api/server/${serverid}/edit`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": getCookie("token")
+                    },
+                    body: body
                 });
+                let jsonData = await response.json();
+                if (jsonData.status == true){
+                    document.getElementById("detail").innerHTML = "<span style='color: var(--bs-success)'>サーバー情報の保存に成功しました。</span>";
+                    setTimeout(() => {
+                        document.getElementById("detail").innerHTML = "";
+                    }, 5000)
+                }else{
+                    document.getElementById("detail").innerHTML = "<span style='color: var(--bs-danger)'>サーバー情報の保存に失敗しました。</span>";
+                    setTimeout(() => {
+                        document.getElementById("detail").innerHTML = "";
+                    }, 5000)
+                }
             }
 
             document.addEventListener("DOMContentLoaded", async () => {
                 await loadServers();
+            });
+
+            document.getElementById("saveButton").addEventListener("click", async () => {
+                await saveEdits();
             });
         </script>
     </body>

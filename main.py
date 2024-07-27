@@ -5,9 +5,10 @@ from contextlib import asynccontextmanager
 import discord
 from discord.ext import commands
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
-from app.endpoints import callback
-from app.endpoints.api import serverList, getUserServer
+from app.endpoints import callback, frontend
+from app.endpoints.api import serverList, getUserServer, edit, getServer
 
 if os.path.isfile(".env"):
     from dotenv import load_dotenv
@@ -47,10 +48,16 @@ async def lifespan(app: FastAPI):
 @bot.event
 async def setup_hook():
     await bot.load_extension("app.cogs.register")
+    await bot.load_extension("app.cogs.up")
+    await bot.load_extension("app.cogs.invite")
 
 
 app = FastAPI(lifespan=lifespan)
+app.mount(path="/static", app=StaticFiles(directory="static"), name="static")
 
 app.include_router(callback.router)
+app.include_router(frontend.router)
 app.include_router(serverList.router)
 app.include_router(getUserServer.router)
+app.include_router(edit.router)
+app.include_router(getServer.router)
