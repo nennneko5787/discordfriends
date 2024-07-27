@@ -16,7 +16,9 @@ async def discordCallback(request: Request, code: str):
         "client_secret": Env.get("client_secret"),
         "grant_type": "authorization_code",
         "code": code,
-        "redirect_uri": str(request.url.remove_query_params("code")),
+        "redirect_uri": str(request.url.remove_query_params("code")).replace(
+            "https", "http"
+        ),
     }
 
     headers = {"Content-Type": "application/x-www-form-urlencoded"}
