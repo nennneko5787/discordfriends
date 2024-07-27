@@ -51,8 +51,6 @@ class UPCog(commands.Cog):
             await ctx.reply(embed=embed)
             return
 
-        now = now + timedelta(hours=1)
-
         try:
             await conn.execute(
                 """
@@ -68,6 +66,8 @@ class UPCog(commands.Cog):
             )
         finally:
             await conn.close()
+            
+        now = now + timedelta(hours=1)
 
         embed = discord.Embed(
             title="うｐしました。",
