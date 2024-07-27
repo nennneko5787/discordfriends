@@ -1,0 +1,4 @@
+fastapi
+asyncpg
+aiohttp
+python-dotenv
