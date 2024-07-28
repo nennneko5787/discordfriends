@@ -14,7 +14,7 @@ class PresenceCog(commands.Cog):
     async def on_ready(self):
         self.presence.start()
 
-    @tasks.loop(hours=1)
+    @tasks.loop(minutes=5)
     async def presence(self):
         conn: asyncpg.Connection = await Env.dbConnect()
         count = await conn.fetchval(
