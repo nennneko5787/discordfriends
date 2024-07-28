@@ -189,6 +189,7 @@
                 let serverImage = document.createElement("img");
                 serverImage.src = server.icon;
                 serverImage.alt = "Server Icon";
+                serverImage.setAttribute("loading", "lazy");
                 element.appendChild(serverImage);
 
                 let serverDetails = document.createElement("div");

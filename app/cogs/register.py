@@ -37,7 +37,7 @@ class RegisterCog(commands.Cog):
                 """,
                 ctx.guild.id,
                 ctx.guild.name,
-                len(ctx.guild.members),
+                sum(not member.bot for member in ctx.guild.members),
                 ctx.guild.icon.url,
                 ctx.guild.created_at,
             )
@@ -46,7 +46,7 @@ class RegisterCog(commands.Cog):
 
         embed = discord.Embed(
             title="でぃすフレに登録する準備が完了しました！",
-            description="[でぃすフレのダッシュボード](https://htnmk.site/dashboard)にアクセスして、サーバーの概要を書いて公開しましょう。",
+            description="まず先に`/invite`コマンドを招待したいチャンネルにて実行してください。\nそして、[でぃすフレのダッシュボード](https://htnmk.site/dashboard)にアクセスして、サーバーの概要を書いて公開しましょう。",
             colour=discord.Colour.green(),
         ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
         await ctx.reply(embed=embed)

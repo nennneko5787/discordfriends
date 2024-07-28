@@ -61,12 +61,12 @@ class UPCog(commands.Cog):
                 now,
                 ctx.guild.name,
                 ctx.guild.icon.url,
-                len(ctx.guild.members),
+                sum(not member.bot for member in ctx.guild.members),
                 ctx.guild.id,
             )
         finally:
             await conn.close()
-            
+
         now = now + timedelta(hours=1)
 
         embed = discord.Embed(
