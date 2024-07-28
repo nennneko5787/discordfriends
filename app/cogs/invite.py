@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
+import asyncpg
 import discord
 from discord.ext import commands
-import asyncpg
 
 from .. import Env
 
@@ -22,6 +22,15 @@ class InviteCog(commands.Cog):
     ):
         if not channel:
             channel = ctx.channel
+
+        if not ctx.author.guild_permissions.manage_guild:
+            embed = discord.Embed(
+                title="権限がありません",
+                description="このコマンドを実行するには、**サーバーの管理**権限が必要です。",
+                colour=discord.Colour.red(),
+            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            await ctx.send(embed=embed, ephemeral=True)
+            return
 
         await ctx.defer()
         conn: asyncpg.Connection = await Env.dbConnect()

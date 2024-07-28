@@ -1,5 +1,5 @@
-import os
 import asyncio
+import os
 from contextlib import asynccontextmanager
 
 import discord
@@ -8,7 +8,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from app.endpoints import callback, frontend
-from app.endpoints.api import serverList, getUserServer, edit, getServer
+from app.endpoints.api import edit, getServer, getUserServer, serverList
 
 if os.path.isfile(".env"):
     from dotenv import load_dotenv

@@ -1,6 +1,6 @@
+import asyncpg
 import discord
 from discord.ext import commands
-import asyncpg
 
 from .. import Env
 
@@ -14,6 +14,15 @@ class RegisterCog(commands.Cog):
         name="register", description="サーバーをでぃすフレに掲載できる状態にします。"
     )
     async def registerCommand(self, ctx: commands.Context):
+        if not ctx.author.guild_permissions.manage_guild:
+            embed = discord.Embed(
+                title="権限がありません",
+                description="このコマンドを実行するには、**サーバーの管理**権限が必要です。",
+                colour=discord.Colour.red(),
+            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            await ctx.send(embed=embed, ephemeral=True)
+            return
+
         await ctx.defer()
         conn: asyncpg.Connection = await Env.dbConnect()
         val = await conn.fetchval(

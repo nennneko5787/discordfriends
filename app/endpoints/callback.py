@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta, timezone
 
+import aiohttp
 from fastapi import APIRouter, Request
 from fastapi.responses import RedirectResponse
-import aiohttp
 
 from .. import Env, userLoader
 

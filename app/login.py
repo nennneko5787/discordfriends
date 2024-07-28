@@ -1,5 +1,6 @@
-import random, string
 import json as JSON
+import random
+import string
 
 import aiohttp
 

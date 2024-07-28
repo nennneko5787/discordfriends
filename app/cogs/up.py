@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
+import asyncpg
 import discord
 from discord.ext import commands
-import asyncpg
 
 from .. import Env
 
