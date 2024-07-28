@@ -10,7 +10,7 @@ class PresenceCog(commands.Cog):
         super().__init__()
         self.bot = bot
 
-    @commands.Cog.listener
+    @commands.Cog.listener()
     async def on_ready(self):
         self.presence.start()
 
