@@ -1,160 +1,227 @@
 <!doctype html>
 <html lang="ja">
-    <head prefix="og: https://ogp.me/ns#">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>でぃすこーどフレンズ！</title>
-        <!-- Open Graph Protocol -->
-        <meta property="og:title" content="トップページ" />
-        <meta property="og:site_name" content="でぃすこーどフレンズ！" />
-        <meta property="og:description" content="Discordサーバーを簡単に探そう！" />
-        <meta property="og:url" content="https://htnmk.site/" />
-        <meta property="og:image" content="https://htnmk.site/static/img/dfriends.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary" />
-        <!-- End Open Graph Protocol -->
-        <meta name="title" content="でぃすこーどフレンズ！">
-        <meta name="description" content="Discordサーバーを簡単に探そう！いろいろなサーバーが集まっています！">
-        <meta name="keywords" content="discord,でぃすこーど,ディスコード,でぃすこ,ディスコ,さーばー,サーバー,server,一覧,いちらん,list">
-        <meta name="robots" content="index, follow">
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="revisit-after" content="1 day">
-        <meta name="description" content="Japanese">
-        <meta name="author" content="nennneko5787">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        <style>
-            .loader {
-                border: 12px solid var(--bs-secondary-bg);
-                border-radius: 50%;
-                border-top: 12px solid var(--bs-primary);
-                width: 100px;
-                height: 100px;
-                animation: spin 1s linear infinite;
+<head prefix="og: https://ogp.me/ns#">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>でぃすこーどフレンズ！</title>
+    <!-- Open Graph Protocol -->
+    <meta property="og:title" content="トップページ" />
+    <meta property="og:site_name" content="でぃすこーどフレンズ！" />
+    <meta property="og:description" content="Discordサーバーを簡単に探そう！" />
+    <meta property="og:url" content="https://htnmk.site/" />
+    <meta property="og:image" content="https://htnmk.site/static/img/dfriends.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <!-- End Open Graph Protocol -->
+    <meta name="title" content="でぃすこーどフレンズ！">
+    <meta name="description" content="Discordサーバーを簡単に探そう！いろいろなサーバーが集まっています！">
+    <meta name="keywords" content="discord,でぃすこーど,ディスコード,でぃすこ,ディスコ,さーばー,サーバー,server,一覧,いちらん,list">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="revisit-after" content="1 day">
+    <meta name="description" content="Japanese">
+    <meta name="author" content="nennneko5787">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        .loader {
+            border: 12px solid var(--bs-secondary-bg);
+            border-radius: 50%;
+            border-top: 12px solid var(--bs-primary);
+            width: 100px;
+            height: 100px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
             }
-
-            @keyframes spin{
-                0%{
-                    transform: rotate(0deg);
-                }
-
-                100%{
-                    transform: rotate(360deg);
-                }
+            100% {
+                transform: rotate(360deg);
             }
+        }
 
-            .topimg {
-                width: 10%;
-                height: 10%;
-            }
+        .topimg {
+            width: 10%;
+            height: 10%;
+        }
 
-            .col {
-                border: solid 2px;
-                border-color: var(--bs-border-color);
-                border-radius: 10px;
+        .server {
+            border: solid 2px;
+            border-color: var(--bs-border-color);
+            border-radius: 10px;
+            margin: 1px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
 
-                padding: 5px;
-            }
-        </style>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <img src="/static/img/dfriends.png" class="topimg navbar-brand"></img>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://discord.gg/M3bpz4hCjc">サポートサーバー</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://discord.com/oauth2/authorize?client_id=1266569180199518289">ボットを導入</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                ログインしていません
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" onclick="login()">ログイン</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="container text-center">
-            <div class="row align-items-start" id="servers">
-                <div style="display: flex; justify-content: center; align-items: center;"><div class="loader"></div></div>
+        .server img {
+            width: 50%;
+            height: 50%;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <img src="/static/img/dfriends.png" class="topimg navbar-brand"></img>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://discord.gg/M3bpz4hCjc">サポートサーバー</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://discord.com/oauth2/authorize?client_id=1266569180199518289">ボットを導入</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0" id="notloggedin">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            ログインしていません
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" onclick="login()">ログイン</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0" id="loggedin" style="display: none;">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            ログイン中
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="/dashboard">ダッシュボード</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout">ログアウト</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-        <script>
-            function getCookie(name) {
-                let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-                if (match) return match[2];
-                return null;
+    <div class="container text-center">
+        <div class="row align-items-start" id="servers" style="display: flex; justify-content: center; align-items: center;">
+            <div style="display: flex; justify-content: center; align-items: center;"><div class="loader"></div></div>
+        </div>
+    </div>
+
+    <footer class="row row-cols-5 py-5 my-5 border-top">
+        <div class="col">
+            <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none" style="margin-left: 10px;">
+                <img src="/static/img/dfriends.png" style="width: 100%;"></img>
+            </a>
+        </div>
+
+        <div class="col">
+
+        </div>
+
+        <div class="col">
+            <h5>でぃすこーどフレンズ！</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="/" class="nav-link p-0 text-body-secondary">ホーム</a></li>
+                <li class="nav-item mb-2"><a href="#" onclick="login()" class="nav-link p-0 text-body-secondary">ログイン</a></li>
+                <li class="nav-item mb-2"><a href="/dashboard" class="nav-link p-0 text-body-secondary">ダッシュボード</a></li>
+                <li class="nav-item mb-2"><a href="https://discord.gg/M3bpz4hCjc" class="nav-link p-0 text-body-secondary">サポートサーバー</a></li>
+                <li class="nav-item mb-2"><a href="https://github.com/nennneko5787/discordfriends" class="nav-link p-0 text-body-secondary">ソースコード(Github)</a></li>
+            </ul>
+        </div>
+
+        <div class="col">
+            <h5>おすすめボカロ</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="https://www.youtube.com/watch?v=8uV_czuhdjc" class="nav-link p-0 text-body-secondary">悪役にキスシーンを</a></li>
+                <li class="nav-item mb-2"><a href="https://www.youtube.com/watch?v=TXzfQ0cP1P0" class="nav-link p-0 text-body-secondary">恋愛裁判</a></li>
+                <li class="nav-item mb-2"><a href="https://www.youtube.com/playlist?list=PLD4GDVLEEp6wi73_170Dmv_QC_KyOc7Yp" class="nav-link p-0 text-body-secondary">... and more</a></li>
+            </ul>
+        </div>
+
+        <div class="col">
+            <h5>その他</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="https://www.nennneko5787.net/" class="nav-link p-0 text-body-secondary">運営者</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script>
+        function getCookie(name) {
+            let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            if (match) return match[2];
+            return null;
+        }
+
+        function loginCheck() {
+            if (getCookie("token")) {
+                document.getElementById("notloggedin").style = "display: none;";
+                document.getElementById("loggedin").style = "";
             }
+        }
 
-            function login() {
-                window.location.href = `https://discord.com/oauth2/authorize?client_id=1266569180199518289&response_type=code&redirect_uri=http%3A%2F%2F${window.location.host}%2Fcallback&scope=guilds+identify`;
-            }
+        function login() {
+            window.location.href = `https://discord.com/oauth2/authorize?client_id=1266569180199518289&response_type=code&redirect_uri=http%3A%2F%2F${window.location.host}%2Fcallback&scope=guilds+identify`;
+        }
 
-            async function loadServers() {
-                let response = await fetch("/api/serverlist", {
-                    "headers": {
-                        "Authorization": getCookie("token")
-                    }
-                });
-                let jsonData = await response.json();
-                console.log(jsonData);
-
-                document.getElementById("servers").innerHTML = "";
-
-                jsonData.forEach(server => {
-                    let element = document.createElement("div");
-                    element.className = "col-2";
-
-                    let serverImage = document.createElement("img");
-                    serverImage.src = server.icon;
-                    serverImage.style = "width: 50%; height: 5s0%;";
-                    element.appendChild(serverImage);
-
-                    element.appendChild(document.createElement("br"));
-
-                    let serverName = document.createElement("span");
-                    serverName.innerText = server.name;
-                    element.appendChild(serverName);
-
-                    element.appendChild(document.createElement("br"));
-
-                    let serverMembers = document.createElement("span");
-                    serverMembers.innerText = `サーバーメンバー数: ${server.memberCount}`;
-                    element.appendChild(serverMembers);
-
-                    element.appendChild(document.createElement("br"));
-
-                    let serverInviteButton = document.createElement("a");
-                    serverInviteButton.className = "btn btn-primary";
-                    serverInviteButton.setAttribute("role", "button");
-                    serverInviteButton.innerText = "参加";
-                    serverInviteButton.href = server.invite
-                    element.appendChild(serverInviteButton);
-
-                    document.getElementById("servers").appendChild(element);
-                });
-            }
-
-            document.addEventListener("DOMContentLoaded", async () => {
-                await loadServers();
+        async function loadServers() {
+            let response = await fetch("/api/serverlist", {
+                "headers": {
+                    "Authorization": getCookie("token")
+                }
             });
-        </script>
-    </body>
+            let jsonData = await response.json();
+            console.log(jsonData);
+
+            document.getElementById("servers").innerHTML = "";
+
+            jsonData.forEach(server => {
+                let element = document.createElement("div");
+                element.className = "col-md-3 server d-flex align-items-center";
+
+                let serverImage = document.createElement("img");
+                serverImage.src = server.icon;
+                serverImage.alt = "Server Icon";
+                element.appendChild(serverImage);
+
+                let serverDetails = document.createElement("div");
+
+                let serverName = document.createElement("h5");
+                serverName.innerText = server.name;
+                serverDetails.appendChild(serverName);
+
+                let serverMembers = document.createElement("p");
+                serverMembers.innerText = `サーバーメンバー数: ${server.memberCount}`;
+                serverDetails.appendChild(serverMembers);
+
+                let serverShort = document.createElement("p");
+                serverShort.innerText = server.short;
+                serverDetails.appendChild(serverShort);
+
+                let serverInviteButton = document.createElement("a");
+                serverInviteButton.className = "btn btn-primary";
+                serverInviteButton.setAttribute("role", "button");
+                serverInviteButton.innerText = "参加";
+                serverInviteButton.href = server.invite;
+                serverDetails.appendChild(serverInviteButton);
+
+                element.appendChild(serverDetails);
+
+                document.getElementById("servers").appendChild(element);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            loginCheck();
+            await loadServers();
+        });
+    </script>
+</body>
 </html>
