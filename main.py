@@ -52,7 +52,12 @@ async def setup_hook():
     await bot.load_extension("app.cogs.invite")
 
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(
+    title="でぃすこーどフレンズ！",
+    summary="Discordサーバーを紹介するサイト",
+    version="2024.07.28",
+    lifespan=lifespan,
+)
 app.mount(path="/static", app=StaticFiles(directory="static"), name="static")
 
 app.include_router(callback.router)
