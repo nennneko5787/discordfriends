@@ -50,6 +50,7 @@ async def setup_hook():
     await bot.load_extension("app.cogs.register")
     await bot.load_extension("app.cogs.up")
     await bot.load_extension("app.cogs.invite")
+    await bot.load_extension("app.cogs.presence")
 
 
 app = FastAPI(
