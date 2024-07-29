@@ -134,6 +134,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script>
+        let serverid = window.location.href.split("/")[4];
+
         function getCookie(name) {
             let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
             if (match) return match[2];
@@ -152,7 +154,7 @@
         }
 
         async function loadServers() {
-            let response = await fetch("/api/server/1124309483703763025");
+            let response = await fetch(`/api/server/${serverid}`);
             let server = await response.json();
             console.log(server);
 
