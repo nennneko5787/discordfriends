@@ -7,7 +7,7 @@ from discord.ext import commands
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from app.endpoints import callback, frontend
+from app.endpoints import callback, frontend, logout
 from app.endpoints.api import edit, getServer, getUserServer, serverList
 
 if os.path.isfile(".env"):
@@ -63,6 +63,7 @@ app.mount(path="/static", app=StaticFiles(directory="static"), name="static")
 
 app.include_router(callback.router)
 app.include_router(frontend.router)
+app.include_router(logout.router)
 app.include_router(serverList.router)
 app.include_router(getUserServer.router)
 app.include_router(edit.router)

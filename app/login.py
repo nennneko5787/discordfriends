@@ -16,7 +16,7 @@ def randomname(n):
 users = {}
 
 
-async def getUser(kanriID: dict):
+async def getUser(kanriID: str):
     if not kanriID in users:
         conn = await Env.dbConnect()
         try:
@@ -30,6 +30,18 @@ async def getUser(kanriID: dict):
         return row["data"]
     else:
         return users[kanriID]
+
+
+async def logout(kanriID: str):
+    if kanriID in users:
+        conn = await Env.dbConnect()
+        try:
+            await conn.execute("DELETE FROM auth WHERE id = $1;", kanriID)
+        finally:
+            await conn.close()
+        del users[kanriID]
+        return True
+    return False
 
 
 async def userLoader(token: str):

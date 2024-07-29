@@ -69,7 +69,11 @@ class UPCog(commands.Cog):
                 """,
                 now,
                 ctx.guild.name,
-                ctx.guild.icon.url,
+                (
+                    ctx.guild.icon.url
+                    if ctx.guild.icon.url is not None
+                    else f"https://cdn.discordapp.com/embed/avatars/{(ctx.guild.id >> 22) % len(discord.enums.DefaultAvatar)}.png"
+                ),
                 sum(not member.bot for member in ctx.guild.members),
                 ctx.guild.id,
             )

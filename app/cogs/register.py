@@ -63,7 +63,11 @@ class RegisterCog(commands.Cog):
                 ctx.guild.id,
                 ctx.guild.name,
                 sum(not member.bot for member in ctx.guild.members),
-                ctx.guild.icon.url,
+                (
+                    ctx.guild.icon.url
+                    if ctx.guild.icon.url is not None
+                    else f"https://cdn.discordapp.com/embed/avatars/{(ctx.guild.id >> 22) % len(discord.enums.DefaultAvatar)}.png"
+                ),
                 ctx.guild.created_at,
             )
         finally:
