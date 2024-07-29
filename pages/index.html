@@ -204,7 +204,7 @@
                 if (server.nsfw) {
                     let ribbonNSFW = document.createElement("div");
                     ribbonNSFW.className = "brook-after";
-                    ribbonNSFW.style = "background-color: rgba(var(--bs-danger-rgb), 0.9);";
+                    ribbonNSFW.style = "background-color: rgba(var(--bs-danger-rgb), 0.9); color: var(--bs-danger-text-emphasis);";
                     ribbonNSFW.innerHTML = "NSFW";
                     element.appendChild(ribbonNSFW);
                 }
@@ -212,7 +212,7 @@
                 if (server.new) {
                     let ribbonNew = document.createElement("div");
                     ribbonNew.className = "brook-after";
-                    ribbonNew.style = "background-color: rgba(var(--bs-info-rgb), 0.9);";
+                    ribbonNew.style = "background-color: rgba(var(--bs-info-rgb), 0.9); color: var(--bs-info-text-emphasis);";
                     ribbonNew.innerHTML = "NEW";
                     element.appendChild(ribbonNew);
                 }
