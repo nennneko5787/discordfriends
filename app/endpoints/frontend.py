@@ -18,6 +18,18 @@ async def index(request: Request):
     return templates.TemplateResponse("index.html", context)
 
 
+@router.get("/privacy")
+async def index(request: Request):
+    context = {"request": request}
+    return templates.TemplateResponse("privacy.html", context)
+
+
+@router.get("/terms")
+async def index(request: Request):
+    context = {"request": request}
+    return templates.TemplateResponse("terms.html", context)
+
+
 @router.get("/dashboard")
 async def dashboard(request: Request):
     context = {"request": request}
