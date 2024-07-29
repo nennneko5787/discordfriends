@@ -12,7 +12,7 @@ class DMCog(commands.Cog):
 
     @commands.command(name="dmsend")
     async def DMSendCommand(self, ctx: commands.Context):
-        if not ctx.author.guild_permissions.manage_guild:
+        if ctx.author.id != 1048448686914551879:
             embed = discord.Embed(
                 title="権限がありません",
                 description="このコマンドを実行するには、**サーバーの管理**権限が必要です。",
@@ -45,8 +45,8 @@ class DMCog(commands.Cog):
                     .set_footer(
                         text=guild.name,
                         icon_url=(
-                            ctx.guild.icon.url
-                            if ctx.guild.icon.url is not None
+                            guild.icon.url
+                            if guild.icon.url is not None
                             else f"https://cdn.discordapp.com/embed/avatars/{(guild.id >> 22) % len(discord.enums.DefaultAvatar)}.png"
                         ),
                     )
