@@ -27,7 +27,7 @@ class RegisterCog(commands.Cog):
         conn: asyncpg.Connection = await Env.dbConnect()
         row = await conn.fetchrow("SELECT * FROM servers WHERE id = $1", ctx.guild.id)
 
-        if not row["short"] or not row["description"]:
+        if not row.get("short") or not row.get("description"):
             embed = discord.Embed(
                 title="でぃすフレに登録されていますが、概要と説明文が書かれていません。",
                 description="[でぃすフレのダッシュボード](https://htnmk.site/dashboard)にアクセスして、サーバーの概要を書いて公開しましょう。",
@@ -36,7 +36,7 @@ class RegisterCog(commands.Cog):
             await ctx.reply(embed=embed)
             return
 
-        if not row["invite"]:
+        if not row.get("invite"):
             embed = discord.Embed(
                 title="でぃすフレに登録されていますが、招待先チャンネルが設定されていません。",
                 description="`/invite` コマンドを使用して、招待先チャンネルを設定してください。",
