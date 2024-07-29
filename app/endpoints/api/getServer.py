@@ -18,9 +18,11 @@ async def getUserServer(serverId: int):
     if row:
         row = dict(row)
         row["id_str"] = str(row["id"])
-        if row["createdAt"].replace(tzinfo=ZoneInfo("Etc/GMT")) + timedelta(
+        at: datetime = row["createdAt"].replace(tzinfo=ZoneInfo("Etc/GMT")) + timedelta(
             days=30
-        ) <= datetime.now(ZoneInfo("Etc/GMT")):
+        )
+        now = datetime.now(ZoneInfo("Etc/GMT"))
+        if at.timestamp() <= now.timestamp():
             row["new"] = True
         else:
             row["new"] = False

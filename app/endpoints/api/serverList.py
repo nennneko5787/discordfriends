@@ -20,9 +20,11 @@ async def serverList(page: int = 0):
         for server in _servers:
             server = dict(server)
             server["id_str"] = str(server["id"])
-            if server["createdAt"].replace(tzinfo=ZoneInfo("Etc/GMT")) + timedelta(
-                days=30
-            ) <= datetime.now(ZoneInfo("Etc/GMT")):
+            at: datetime = server["createdAt"].replace(
+                tzinfo=ZoneInfo("Etc/GMT")
+            ) + timedelta(days=30)
+            now = datetime.now(ZoneInfo("Etc/GMT"))
+            if at.timestamp() <= now.timestamp():
                 server["new"] = True
             else:
                 server["new"] = False
