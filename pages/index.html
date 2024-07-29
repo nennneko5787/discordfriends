@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ja">
-<head prefix="og: https://ogp.me/ns#">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>でぃすこーどフレンズ！</title>
@@ -61,12 +61,29 @@
             height: 50%;
             margin-right: 10px;
         }
+
+        .server {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brook-after {
+            width: 400px;
+            transform: rotate(-45deg);
+            transform-origin: top center;
+            position: absolute;
+            top: 20px;
+            left: -180px;
+            padding: 15px 143.44px;
+            box-sizing: border-box;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <img src="/static/img/dfriends.png" class="topimg navbar-brand"></img>
+            <img src="/static/img/dfriends.png" class="topimg navbar-brand">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -117,7 +134,7 @@
     <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 py-5 my-5 border-top">
         <div class="col mb-4">
             <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none" style="margin-left: 10px;">
-                <img src="/static/img/dfriends.png" style="width: 100%;"></img>
+                <img src="/static/img/dfriends.png" style="width: 100%;">
             </a>
         </div>
 
@@ -160,8 +177,8 @@
 
         function loginCheck() {
             if (getCookie("token")) {
-                document.getElementById("notloggedin").style = "display: none;";
-                document.getElementById("loggedin").style = "";
+                document.getElementById("notloggedin").style.display = "none";
+                document.getElementById("loggedin").style.display = "block";
             }
         }
 
@@ -171,7 +188,7 @@
 
         async function loadServers() {
             let response = await fetch("/api/serverlist", {
-                "headers": {
+                headers: {
                     "Authorization": getCookie("token")
                 }
             });
@@ -183,6 +200,22 @@
             jsonData.forEach(server => {
                 let element = document.createElement("div");
                 element.className = "col-md-3 server d-flex align-items-center";
+
+                if (server.nsfw) {
+                    let ribbonNSFW = document.createElement("div");
+                    ribbonNSFW.className = "brook-after";
+                    ribbonNSFW.style = "background-color: rgba(var(--bs-danger-rgb), 0.9);";
+                    ribbonNSFW.innerHTML = "NSFW";
+                    element.appendChild(ribbonNSFW);
+                }
+
+                if (server.new) {
+                    let ribbonNew = document.createElement("div");
+                    ribbonNew.className = "brook-after";
+                    ribbonNew.style = "background-color: rgba(var(--bs-info-rgb), 0.9);";
+                    ribbonNew.innerHTML = "NEW";
+                    element.appendChild(ribbonNew);
+                }
 
                 let serverImage = document.createElement("img");
                 serverImage.src = server.icon;

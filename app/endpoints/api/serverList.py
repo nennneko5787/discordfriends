@@ -1,3 +1,6 @@
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
+
 from fastapi import APIRouter
 
 from ... import Env
@@ -17,6 +20,13 @@ async def serverList(page: int = 0):
         for server in _servers:
             server = dict(server)
             server["id_str"] = str(server["id"])
+            if server["createdAt"].replace(tzinfo=ZoneInfo("Etc/GMT")) + timedelta(
+                days=30
+            ) <= datetime.now(ZoneInfo("Etc/GMT")):
+                server["new"] = True
+            else:
+                server["new"] = False
+
             servers.append(server)
     finally:
         await conn.close()

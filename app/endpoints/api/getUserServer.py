@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 import asyncio
 
 from fastapi import APIRouter, Header, HTTPException
@@ -24,6 +26,12 @@ async def getUserServer(authorization: str = Header(...)):
                     row = dict(row)
                     row["raw"] = server
                     row["id_str"] = str(row["id"])
+                    if row["createdAt"].replace(tzinfo=ZoneInfo("Etc/GMT")) + timedelta(
+                        days=30
+                    ) <= datetime.now(ZoneInfo("Etc/GMT")):
+                        row["new"] = True
+                    else:
+                        row["new"] = False
                     servers.append(row)
             await asyncio.sleep(0)
     finally:
