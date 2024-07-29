@@ -24,11 +24,19 @@ async def serverList(page: int = 0):
                 tzinfo=ZoneInfo("Etc/GMT")
             ) + timedelta(days=30)
             now = datetime.now(ZoneInfo("Etc/GMT"))
-            print(at, now)
             if at.timestamp() >= now.timestamp():
                 server["new"] = True
             else:
                 server["new"] = False
+
+            at: datetime = server["serverCreatedDate"].replace(
+                tzinfo=ZoneInfo("Etc/GMT")
+            ) + timedelta(days=30)
+            now = datetime.now(ZoneInfo("Etc/GMT"))
+            if at.timestamp() >= now.timestamp():
+                server["dekitate"] = True
+            else:
+                server["dekitate"] = False
 
             servers.append(server)
     finally:

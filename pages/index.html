@@ -78,6 +78,37 @@
             box-sizing: border-box;
             text-align: center;
         }
+
+        .nsfw-bg {
+            margin: 0;
+            overflow: hidden; /* 画面外にコンテンツがはみ出さないようにする */
+            background: repeating-linear-gradient(
+                110deg,
+                #000,
+                #000 10px,
+                #FFD700 10px,
+                #FFD700 20px
+            );
+            background-size: 200% 100%;
+            animation: moveBg 5s linear infinite;
+        }
+
+        @keyframes moveBg {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 0%;
+            }
+        }
+
+        .outlined-text {
+            font-size: 110%;
+            color: white;
+            font-weight: 1000;
+            -webkit-text-stroke: 0.1px black; /* ストロークの幅を維持 */
+            text-stroke: 0.1px black; /* ストロークの幅を維持 */
+        }
     </style>
 </head>
 <body>
@@ -205,16 +236,20 @@
 
                 if (server.nsfw) {
                     let ribbonNSFW = document.createElement("div");
-                    ribbonNSFW.className = "brook-after";
-                    ribbonNSFW.style = "background-color: rgba(var(--bs-danger-rgb), 0.9); color: var(--bs-danger-text-emphasis);";
-                    ribbonNSFW.innerHTML = "NSFW";
+                    ribbonNSFW.className = "brook-after nsfw-bg";
+                    ribbonNSFW.style = "color: var(--bs-danger-text-emphasis);";
+                    ribbonNSFW.innerHTML = "<span class=\"outlined-text\">NSFW</span>";
                     element.appendChild(ribbonNSFW);
-                }
-
-                if (server.new) {
+                }else if (server.dekitate) {
+                    let ribbonDekitate = document.createElement("div");
+                    ribbonDekitate.className = "brook-after";
+                    ribbonDekitate.style = "background-color: rgba(var(	--bs-success-rgb), 0.9); color: var(--bs-success-text-emphasis);";
+                    ribbonDekitate.innerHTML = "できたて！";
+                    element.appendChild(ribbonDekitate);
+                }else if (server.new) {
                     let ribbonNew = document.createElement("div");
                     ribbonNew.className = "brook-after";
-                    ribbonNew.style = "background-color: rgba(var(--bs-info-rgb), 0.9); color: var(--bs-info-text-emphasis);";
+                    ribbonNew.style = "background-color: rgba(var(--bs-primary-rgb), 0.9); color: var(--bs-primary-text-emphasis);";
                     ribbonNew.innerHTML = "NEW";
                     element.appendChild(ribbonNew);
                 }
