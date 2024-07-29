@@ -19,7 +19,7 @@ class RegisterCog(commands.Cog):
                 title="権限がありません",
                 description="このコマンドを実行するには、**サーバーの管理**権限が必要です。",
                 colour=discord.Colour.red(),
-            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
             await ctx.send(embed=embed, ephemeral=True)
             return
 
@@ -32,7 +32,7 @@ class RegisterCog(commands.Cog):
                 title="でぃすフレに登録されていますが、概要と説明文が書かれていません。",
                 description="[でぃすフレのダッシュボード](https://htnmk.site/dashboard)にアクセスして、サーバーの概要を書いて公開しましょう。",
                 colour=discord.Colour.red(),
-            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
             await ctx.reply(embed=embed)
             return
 
@@ -41,7 +41,7 @@ class RegisterCog(commands.Cog):
                 title="でぃすフレに登録されていますが、招待先チャンネルが設定されていません。",
                 description="`/invite` コマンドを使用して、招待先チャンネルを設定してください。",
                 colour=discord.Colour.red(),
-            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
             await ctx.reply(embed=embed)
             return
 
@@ -50,7 +50,7 @@ class RegisterCog(commands.Cog):
                 title="既にでぃすフレに登録できる状態のようです",
                 description="[でぃすフレのダッシュボード](https://htnmk.site/dashboard)にアクセスして、サーバーの概要を書いて公開しましょう。",
                 colour=discord.Colour.red(),
-            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
             await ctx.reply(embed=embed)
             return
 
@@ -77,7 +77,7 @@ class RegisterCog(commands.Cog):
             title="でぃすフレに登録する準備が完了しました！",
             description="まず先に`/invite`コマンドを招待したいチャンネルにて実行してください。\nそして、[でぃすフレのダッシュボード](https://htnmk.site/dashboard)にアクセスして、サーバーの概要を書いて公開しましょう。",
             colour=discord.Colour.green(),
-        ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+        ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
         await ctx.reply(embed=embed)
         return
 

@@ -28,7 +28,7 @@ class InviteCog(commands.Cog):
                 title="権限がありません",
                 description="このコマンドを実行するには、**サーバーの管理**権限が必要です。",
                 colour=discord.Colour.red(),
-            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
             await ctx.send(embed=embed, ephemeral=True)
             return
 
@@ -41,7 +41,7 @@ class InviteCog(commands.Cog):
                 title="でぃすフレに登録されていません。",
                 description="`/register` コマンドを使用して、でぃすフレにサーバーを登録する準備を開始しましょう。",
                 colour=discord.Colour.red(),
-            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
             await ctx.reply(embed=embed)
             return
 
@@ -65,7 +65,7 @@ class InviteCog(commands.Cog):
             title="サーバーの招待チャンネルを変更しました。",
             description=f"招待先チャンネル: {channel.jump_url}",
             colour=discord.Colour.green(),
-        ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+        ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
         await ctx.reply(embed=embed)
         return
 

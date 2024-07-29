@@ -24,7 +24,7 @@ class UPCog(commands.Cog):
                 title="でぃすフレに登録されていません。",
                 description="`/register` コマンドを使用して、でぃすフレにサーバーを登録する準備を開始しましょう。",
                 colour=discord.Colour.red(),
-            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
             await ctx.reply(embed=embed)
             return
 
@@ -33,7 +33,7 @@ class UPCog(commands.Cog):
                 title="でぃすフレに登録されていますが、概要と説明文が書かれていません。",
                 description="[でぃすフレのダッシュボード](https://htnmk.site/dashboard)にアクセスして、サーバーの概要を書いて公開しましょう。",
                 colour=discord.Colour.red(),
-            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
             await ctx.reply(embed=embed)
             return
 
@@ -42,7 +42,7 @@ class UPCog(commands.Cog):
                 title="でぃすフレに登録されていますが、招待先チャンネルが設定されていません。",
                 description="`/invite` コマンドを使用して、招待先チャンネルを設定してください。",
                 colour=discord.Colour.red(),
-            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
             await ctx.reply(embed=embed)
             return
 
@@ -56,7 +56,7 @@ class UPCog(commands.Cog):
                 title="うｐするのが早すぎます。",
                 description=f"うｐできるのは<t:{int(uppedAt.timestamp())}:R>からです。",
                 colour=discord.Colour.red(),
-            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
             await ctx.reply(embed=embed)
             return
 
@@ -86,7 +86,7 @@ class UPCog(commands.Cog):
             title="うｐしました。",
             description=f"<t:{int(now.timestamp())}:R> にまたうｐできます。",
             colour=discord.Colour.green(),
-        ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+        ).set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
         await ctx.reply(embed=embed)
         return
 
