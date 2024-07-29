@@ -56,6 +56,7 @@ class DMCog(commands.Cog):
                     f"{guild.name} ({guild.id}) の主の {guild.owner.name} ({guild.owner.id}) にDMを送りました。"
                 )
         await conn.close()
+        await ctx.reply("処理完了")
         return
 
 

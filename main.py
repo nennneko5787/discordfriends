@@ -23,6 +23,14 @@ intents.message_content = True
 bot: commands.Bot = commands.Bot("disfre#", intents=intents)
 
 
+@bot.command(name="load")
+async def loadExtension(ctx: commands.Context, extension: str):
+    if ctx.author.id != 1048448686914551879:
+        return
+    await bot.load_extension(extension)
+    await ctx.reply(f"loaded {extension}")
+
+
 @bot.command(name="reload")
 async def reloadExtention(ctx: commands.Context, extension: str):
     if ctx.author.id != 1048448686914551879:
@@ -52,6 +60,7 @@ async def setup_hook():
     await bot.load_extension("app.cogs.invite")
     await bot.load_extension("app.cogs.presence")
     await bot.load_extension("app.cogs.serverInfo")
+    await bot.load_extension("app.cogs.dm")
 
 
 app = FastAPI(
