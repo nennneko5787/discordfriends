@@ -157,6 +157,7 @@
             let response = await fetch(`/api/server/${serverid}`);
             let server = await response.json();
             console.log(server);
+            document.title = `${server.name} - でぃすこーどフレンズ！`;
 
             document.getElementById("server").innerHTML = "";
 
