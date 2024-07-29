@@ -37,6 +37,15 @@ class UPCog(commands.Cog):
             await ctx.reply(embed=embed)
             return
 
+        if not row["invite"]:
+            embed = discord.Embed(
+                title="でぃすフレに登録されていますが、招待先チャンネルが設定されていません。",
+                description="`/invite` コマンドを使用して、招待先チャンネルを設定してください。",
+                colour=discord.Colour.red(),
+            ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
+            await ctx.reply(embed=embed)
+            return
+
         now = datetime.now(ZoneInfo("Etc/GMT"))
         uppedAt: datetime = row["uppedAt"].replace(
             tzinfo=ZoneInfo("Etc/GMT")
