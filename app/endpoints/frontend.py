@@ -1,5 +1,12 @@
+import json as JSON
+import re
+
 from fastapi import APIRouter, Request
 from fastapi.templating import Jinja2Templates
+import aiofiles
+import asyncpg
+
+from .. import Env
 
 router = APIRouter()
 templates = Jinja2Templates(directory="pages")
@@ -15,6 +22,25 @@ async def index(request: Request):
 async def dashboard(request: Request):
     context = {"request": request}
     return templates.TemplateResponse("dashboard.html", context)
+
+
+@router.get("/servers/{serverId:int}")
+async def serverEdit(request: Request, serverId: int):
+    async with aiofiles.open("crawler-user-agents.json", "r") as f:
+        raw = await f.read()
+    bots = JSON.loads(raw)
+    crawler = False
+    for bot in bots:
+        if re.search(bot["pattern"], request.headers["user-agent"]):
+            crawler = True
+    if not crawler:
+        context = {"request": request, "serverId": serverId}
+        return templates.TemplateResponse("server.html", context)
+    else:
+        conn: asyncpg.Connection = await Env.dbConnect()
+        row = await conn.fetchrow("SELECT * FROM servers WHERE id = $1", serverId)
+        context = {"request": request, "server": row}
+        return templates.TemplateResponse("serverOGP.html", context)
 
 
 @router.get("/servers/{serverId:int}/edit")

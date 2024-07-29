@@ -1,3 +1,5 @@
+import html
+
 from fastapi import APIRouter, Header, HTTPException
 from pydantic import BaseModel
 
@@ -41,8 +43,12 @@ async def editServer(
             SET short = $1, description = $2, nsfw = $3
             WHERE id = $4
             """,
-            serverModel.short.replace("\r\n", "").replace("\r", "").replace("\n", ""),
-            serverModel.description,
+            html.escape(
+                serverModel.short.replace("\r\n", "")
+                .replace("\r", "")
+                .replace("\n", "")
+            ),
+            html.escape(serverModel.description),
             serverModel.nsfw,
             serverId,
         )
