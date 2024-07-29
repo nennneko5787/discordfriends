@@ -28,8 +28,6 @@ async def editServer(
             print("一致した")
             if server["permissions"] & 0x00000020:
                 ownFlag = True
-            else:
-                print(server["raw"]["permissions"])
     if not ownFlag:
         raise HTTPException(400)
 

@@ -68,18 +68,20 @@
         </nav>
 
         <div style="padding: 10px;">
-            <h1 id="h1">編集</h1>
-            <label for="short" class="form-label">サーバーの概要(50文字以内): </label>
-            <input type="text" id="short" maxlength="50" />
-            <br>
-            <label for="description" class="form-label">サーバーの説明: </label>
-            <textarea class="form-control" id="description"></textarea>
-            <br>
-            <label for="nsfw" class="form-label">NSFWサーバー: </label>
-            <input type="checkbox" id="nsfw" />
-            <br>
-            <button type="button" class="btn btn-primary" id="saveButton">保存</button>
-            <p id="detail"></p>
+            <form id="editForm">
+                <h1 id="h1">編集</h1>
+                <label for="short" class="form-label">サーバーの概要(50文字以内): </label>
+                <input type="text" id="short" maxlength="50" />
+                <br>
+                <label for="description" class="form-label">サーバーの説明: </label>
+                <textarea class="form-control" id="description"></textarea>
+                <br>
+                <label for="nsfw" class="form-label">NSFWサーバー: </label>
+                <input type="checkbox" id="nsfw" />
+                <br>
+                <button type="submit" class="btn btn-primary">保存</button>
+                <p id="detail"></p>
+            </form>
         </div>
 
         <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 py-5 my-5 border-top">
@@ -133,17 +135,19 @@
                 window.location.href = `https://discord.com/oauth2/authorize?client_id=1266569180199518289&response_type=code&redirect_uri=http%3A%2F%2F${window.location.host}%2Fcallback&scope=guilds+identify`;
             }
 
-            async function loadServers() {
+            async function loadServer() {
                 let response = await fetch(`/api/server/${serverid}`);
                 let jsonData = await response.json();
                 console.log(jsonData);
+                document.title = `${jsonData.name} の編集 - でぃすこーどフレンズ！`;
                 document.getElementById("h1").innerText = `${jsonData.name} の編集`;
-                document.getElementById("short").setAttribute("value", jsonData.short);
-                document.getElementById("description").innerText = jsonData.description;
+                document.getElementById("short").setAttribute("value", jsonData.short ? jsonData.short : "");
+                document.getElementById("description").innerText = jsonData.description ? jsonData.description : "";
                 document.getElementById("nsfw").setAttribute("value", jsonData.nsfw);
             }
 
-            async function saveEdits() {
+            async function saveEdits(e) {
+                e.preventDefault()
                 let short = document.getElementById("short").value;
                 let description= document.getElementById("description").value;
                 let nsfw = document.getElementById("nsfw").checked;
@@ -157,12 +161,19 @@
                     },
                     body: body
                 });
-                let jsonData = await response.json();
-                if (jsonData.status == true){
-                    document.getElementById("detail").innerHTML = "<span style='color: var(--bs-success)'>サーバー情報の保存に成功しました。</span>";
-                    setTimeout(() => {
-                        document.getElementById("detail").innerHTML = "";
-                    }, 5000)
+                if (response.status == 200){
+                    let jsonData = await response.json();
+                    if (jsonData.status == true){
+                        document.getElementById("detail").innerHTML = "<span style='color: var(--bs-success)'>サーバー情報の保存に成功しました。</span>";
+                        setTimeout(() => {
+                            document.getElementById("detail").innerHTML = "";
+                        }, 5000)
+                    }else{
+                        document.getElementById("detail").innerHTML = "<span style='color: var(--bs-danger)'>サーバー情報の保存に失敗しました。</span>";
+                        setTimeout(() => {
+                            document.getElementById("detail").innerHTML = "";
+                        }, 5000)
+                    }
                 }else{
                     document.getElementById("detail").innerHTML = "<span style='color: var(--bs-danger)'>サーバー情報の保存に失敗しました。</span>";
                     setTimeout(() => {
@@ -172,11 +183,11 @@
             }
 
             document.addEventListener("DOMContentLoaded", async () => {
-                await loadServers();
+                await loadServer();
             });
 
-            document.getElementById("saveButton").addEventListener("click", async () => {
-                await saveEdits();
+            document.getElementById("editForm").addEventListener("submit", async (e) => {
+                await saveEdits(e);
             });
         </script>
     </body>

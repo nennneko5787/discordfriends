@@ -16,14 +16,15 @@ async def getUserServer(authorization: str = Header(...)):
     servers = []
     try:
         for server in user["guilds"]:
-            row = await conn.fetchrow(
-                "SELECT * FROM servers WHERE id = $1", int(server["id"])
-            )
-            if row:
-                row = dict(row)
-                row["raw"] = server
-                row["id_str"] = str(row["id"])
-                servers.append(row)
+            if server["permissions"] & 0x00000020:
+                row = await conn.fetchrow(
+                    "SELECT * FROM servers WHERE id = $1", int(server["id"])
+                )
+                if row:
+                    row = dict(row)
+                    row["raw"] = server
+                    row["id_str"] = str(row["id"])
+                    servers.append(row)
             await asyncio.sleep(0)
     finally:
         await conn.close()
