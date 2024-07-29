@@ -22,7 +22,7 @@ async def getUserServer(serverId: int):
             days=30
         )
         now = datetime.now(ZoneInfo("Etc/GMT"))
-        if at.timestamp() <= now.timestamp():
+        if at.timestamp() >= now.timestamp():
             row["new"] = True
         else:
             row["new"] = False

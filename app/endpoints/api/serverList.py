@@ -24,7 +24,8 @@ async def serverList(page: int = 0):
                 tzinfo=ZoneInfo("Etc/GMT")
             ) + timedelta(days=30)
             now = datetime.now(ZoneInfo("Etc/GMT"))
-            if at.timestamp() <= now.timestamp():
+            print(at, now)
+            if at.timestamp() >= now.timestamp():
                 server["new"] = True
             else:
                 server["new"] = False
