@@ -1,6 +1,6 @@
 import asyncio
 
-from fastapi import APIRouter, Header, Cookie
+from fastapi import APIRouter, Cookie, Header
 from fastapi.responses import RedirectResponse
 
 from .. import logout

@@ -1,2 +1,2 @@
 from .env import Env
-from .login import getUser, userLoader, logout
+from .login import getUser, logout, userLoader
