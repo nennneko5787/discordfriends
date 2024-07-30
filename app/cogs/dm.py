@@ -15,13 +15,26 @@ class DMCog(commands.Cog):
         if ctx.author.id != 1048448686914551879:
             embed = discord.Embed(
                 title="権限がありません",
-                description="このコマンドを実行するには、**サーバーの管理**権限が必要です。",
+                description="あなたには権限はありません",
                 colour=discord.Colour.red(),
             ).set_author(name=ctx.bot.user.name, icon_url=ctx.bot.user.display_avatar)
             await ctx.send(embed=embed, ephemeral=True)
             return
 
         await ctx.defer()
+        if not ctx.author.dm_channel:
+            await ctx.author.create_dm()
+        embed = (
+            discord.Embed(
+                title="あなたのサーバーはでぃすこーどフレンズ！に登録されていません。",
+                description=f"登録するには、**TEST**にて以下の操作を行ってください。\n- `/register` コマンドを実行する。\n`/invite` コマンドを実行する。\n[でぃすこーどフレンズ！のダッシュボード](https://htnmk.site/dashboard)にアクセスし、サーバーの概要を書く。\n\n以上の操作を行っても公開できない場合は、[でぃすこーどフレンズ！のサポートサーバー](https://discord.gg/M3bpz4hCjc)まで報告をお願いします。\n※このDMに返信しても、私は対応できません。",
+                color=discord.Colour.blurple(),
+            )
+            .set_author(name=self.bot.user.name, icon_url=self.bot.user.display_avatar)
+            .set_footer(text="TEST")
+        )
+        await ctx.author.dm_channel.send(embed=embed)
+
         conn: asyncpg.Connection = await Env.dbConnect()
         for guild in self.bot.guilds:
             try:
