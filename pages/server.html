@@ -178,7 +178,7 @@
 
             let serverName = document.createElement("h5");
             let serverNameLink = document.createElement("a");
-            serverNameLink.innerHTML = server.name;
+            serverNameLink.textContent = server.name;
             serverNameLink.style = "text-decoration: none; color: var(--bs-body-color);";
             serverNameLink.href = `/servers/${server.id_str}`;
             serverName.appendChild(serverNameLink);
@@ -189,7 +189,7 @@
             serverInfo.appendChild(serverMembers);
 
             let serverShort = document.createElement("p");
-            serverShort.innerText = server.short;
+            serverShort.textContent = server.short;
             serverInfo.appendChild(serverShort);
 
             serverHeading.appendChild(serverInfo);
@@ -197,7 +197,7 @@
 
             let serverDetails = document.createElement("div");
             let serverDescription = document.createElement("p");
-            serverDescription.innerHTML = server.description.replace("\r\n", "<br>").replace("\r", "<br>").replace("\n", "<br>");
+            serverDescription.textContent = server.description.replace("\r\n", "<br>").replace("\r", "<br>").replace("\n", "<br>");
             serverDetails.appendChild(serverDescription);
 
             let serverInviteButton = document.createElement("a");
