@@ -1,5 +1,5 @@
-discord
-fastapi
+discord.py
+fastapi[all]
 asyncpg
 aiohttp
 python-dotenv
