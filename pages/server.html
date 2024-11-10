@@ -197,7 +197,7 @@
 
             let serverDetails = document.createElement("div");
             let serverDescription = document.createElement("p");
-            serverDescription.textContent = server.description.replace("\r\n", "<br>").replace("\r", "<br>").replace("\n", "<br>");
+            serverDescription.innerHTML = server.description.replace("\r\n", "<br>").replace("\r", "<br>").replace("\n", "<br>");
             serverDetails.appendChild(serverDescription);
 
             let serverInviteButton = document.createElement("a");
